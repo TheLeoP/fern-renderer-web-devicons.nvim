@@ -2,18 +2,11 @@
 
 [![fern renderer](https://img.shields.io/badge/🌿%20fern-plugin-yellowgreen)](https://github.com/lambdalisue/fern.vim)
 
----
-
-**DEPRECATED:** 
-Use [fern-renderer-nerdfont.vim](https://github.com/lambdalisue/fern-renderer-nerdfont.vim) with [nerdfont.vim](https://github.com/lambdalisue/nerdfont.vim) as an alternative.
-
----
-
-[fern.vim](https://github.com/lambdalisue/fern.vim) plugin which add file type icons through [ryanoasis/vim-devicons](https://github.com/ryanoasis/vim-devicons).
+[fern.vim](https://github.com/lambdalisue/fern.vim) plugin which add file type icons through [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons).
 
 ## Requreiments
 
-- [ryanoasis/vim-devicons](https://github.com/ryanoasis/vim-devicons)
+- [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
 - Patched font
   - [Nerd Fonts](https://www.nerdfonts.com/)
   - [Cica](https://github.com/miiton/Cica)
@@ -21,10 +14,16 @@ Use [fern-renderer-nerdfont.vim](https://github.com/lambdalisue/fern-renderer-ne
 
 ## Usage
 
-Set `"devicons"` to `g:fern#renderer` like:
+Set `g:fern#renderer` to `"nvim-web-devicons"` like:
 
 ```vim
-let g:fern#renderer = "devicons"
+let g:fern#renderer = "nvim-web-devicons"
+```
+
+Or using lua:
+
+```lua
+vim.g["fern#renderer"] = "nvim-web-devicons"
 ```
 
 ## See also

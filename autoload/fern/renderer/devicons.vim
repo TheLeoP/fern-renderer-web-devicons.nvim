@@ -63,16 +63,20 @@ function! s:render_node(node, base, options) abort
   let leading = repeat(a:options.leading, level - 1)
   let symbol = s:get_node_symbol(a:node)
   let suffix = a:node.status ? '/' : ''
+
   return leading . symbol . a:node.label . suffix . '' . a:node.badge
 endfunction
 
 function! s:get_node_symbol(node) abort
   if a:node.status is# s:STATUS_NONE
-    let symbol = WebDevIconsGetFileTypeSymbol(a:node.bufname, 0)
+    let filename = fnamemodify(a:node.bufname, ':t')
+    let extension = fnamemodify(a:node.bufname, ':e')
+    let symbol = luaeval(printf('require"nvim-web-devicons".get_icon("%s", "%s")', filename, extension))
+
   elseif a:node.status is# s:STATUS_COLLAPSED
-    let symbol = WebDevIconsGetFileTypeSymbol(a:node.bufname, 1)
+    let symbol = ""
   else
-    let symbol = g:DevIconsDefaultFolderOpenSymbol
+    let symbol = ""
   endif
   return symbol . '  '
 endfunction
