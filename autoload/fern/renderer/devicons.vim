@@ -9,10 +9,6 @@ let s:STATUS_COLLAPSED = g:fern#STATUS_COLLAPSED
 
 function! fern#renderer#devicons#new() abort
   let default = fern#renderer#default#new()
-  if !exists('*WebDevIconsGetFileTypeSymbol')
-    call fern#logger#error("WebDevIconsGetFileTypeSymbol is not found. 'devicons' renderer requires 'ryanoasis/vim-devicons'.")
-    return default
-  endif
   return extend(copy(default), {
         \ 'render': funcref('s:render'),
         \ 'syntax': funcref('s:syntax'),
