@@ -33,7 +33,7 @@ vim.g["fern#renderer"] = "nvim-web-devicons"
 ```
 ## FAQ
 
-## How to use [lambdalisue/glyph-palette.vim](https://github.com/lambdalisue/glyph-palette.vim)
+### How to use [lambdalisue/glyph-palette.vim](https://github.com/lambdalisue/glyph-palette.vim)
 
 See their [usage section](https://github.com/lambdalisue/glyph-palette.vim#usage)
 
