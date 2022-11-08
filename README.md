@@ -6,11 +6,17 @@
 
 ## Requirements
 
+Mandatory:
+
 - [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
 - Patched font
   - [Nerd Fonts](https://www.nerdfonts.com/)
   - [Cica](https://github.com/miiton/Cica)
   - [Others](https://github.com/ryanoasis/nerd-fonts#patched-fonts)
+
+Optional:
+
+- [lambdalisue/glyph-palette.vim](https://github.com/lambdalisue/glyph-palette.vim) - Apply individual colors on icons 
 
 ## Usage
 
@@ -25,7 +31,22 @@ Or using lua:
 ```lua
 vim.g["fern#renderer"] = "nvim-web-devicons"
 ```
+## FAQ
 
-## See also
+## How to use [lambdalisue/glyph-palette.vim](https://github.com/lambdalisue/glyph-palette.vim)
 
-- [lambdalisue/glyph-palette.vim](https://github.com/lambdalisue/glyph-palette.vim) - Apply individual colors on icons
+See their [usage section](https://github.com/lambdalisue/glyph-palette.vim#usage)
+
+### How to add individual colors to the icons?
+
+Set `g:fern#renderer` like:
+
+```vim
+let g:fern#renderer = v:lua.require'fr-web-icons'.palette()
+```
+
+Or using lua:
+
+```lua
+vim.g["glyph_palette#palette"] = require'fr-web-icons'.palette()
+```
