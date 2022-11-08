@@ -7,7 +7,7 @@ let s:AsyncLambda = vital#fern#import('Async.Lambda')
 let s:STATUS_NONE = g:fern#STATUS_NONE
 let s:STATUS_COLLAPSED = g:fern#STATUS_COLLAPSED
 
-function! fern#renderer#devicons#new() abort
+function! fern#renderer#web_devicons#new() abort
   let default = fern#renderer#default#new()
   return extend(copy(default), {
         \ 'render': funcref('s:render'),
@@ -18,10 +18,10 @@ endfunction
 
 function! s:render(nodes) abort
   let options = {
-        \ 'leading': g:fern#renderer#devicons#leading,
+        \ 'leading': g:fern#renderer#web_devicons#leading,
         \}
   let base = len(a:nodes[0].__key)
-  let Profile = fern#profile#start('fern#renderer#devicons#s:render')
+  let Profile = fern#profile#start('fern#renderer#web_devicons#s:render')
   return s:AsyncLambda.map(copy(a:nodes), { v, -> s:render_node(v, base, options) })
         \.finally({ -> Profile() })
 endfunction

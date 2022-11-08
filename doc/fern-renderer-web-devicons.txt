@@ -1,0 +1,82 @@
+*fern-renderer-web-devicons.txt*		fern plugin to render web-devicons
+
+=============================================================================
+CONTENTS				*fern-renderer-web-devicons-contents*
+
+INTRODUCTION			|fern-renderer-web-devicons-introduction|
+USAGE				|fern-renderer-web-devicons-usage|
+INTERFACE			|fern-renderer-web-devicons-interface|
+  VARIABLE			|fern-renderer-web-devicons-variable|
+  COLORS			|fern-renderer-web-devicons-colors|
+
+
+=============================================================================
+INTRODUCTION				*fern-renderer-web-devicons-introduction*
+
+*fern-renderer-web-devicons.vim* is a |fern.vim| plugin which adds file type
+icons support.
+
+
+=============================================================================
+USAGE					*fern-renderer-web-devicons-usage*
+
+Install https://github.com/nvim-tree/nvim-web-devicons and set |g:fern#renderer|
+to "nvim-web-devicons" like:
+>
+	let g:fern#renderer = "nvim-web-devicons"
+<
+
+=============================================================================
+INTERFACE				*fern-renderer-web-devicons-interface*
+
+-----------------------------------------------------------------------------
+VARIABLE				*fern-renderer-web-devicons-variable*
+
+*g:fern#renderer#web_devicons#leading*
+	A |String| which is prepended to each node to indicates the nested
+	level of the node.
+
+	For example, when the value is "~~", the renderer output become:
+>
+	  root
+	  |- deep
+	  ~~|- alpha
+	  ~~~~|- beta
+	  ~~~~~~|  gamma
+<
+	Default: " "
+
+*g:fern#renderer#web_devicons#marked_symbol*
+	A |String| which is prepended to marked nodes.
+
+	For example, when the value is "--> ", the renderer output become:
+>
+	--> root
+	  |- shallow
+	--> |+ alpha
+	   |- beta
+	--> |  gamma
+<
+	Default: "✓  "
+
+*g:fern#renderer#web_devicons#unmarked_symbol*
+	A |String| which is prepended to nodes which is not marked.
+
+	For example, when the value is "--> ", the renderer output become:
+>
+	* root
+	--> |- shallow
+	* |+ alpha
+	--> |- beta
+	* |  gamma
+<
+	Default: "   "
+
+-----------------------------------------------------------------------------
+COLORS				*fern-renderer-web-devicons-colors*
+
+Nvim-web-devicons allows users to override icons and colors.
+See example https://github.com/nvim-tree/nvim-web-devicons#set-an-icon.
+
+=============================================================================
+vim:tw=78:fo=tcq2mM:ts=8:ft=help:norl
