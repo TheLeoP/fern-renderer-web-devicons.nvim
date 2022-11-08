@@ -42,7 +42,7 @@ See their [usage section](https://github.com/lambdalisue/glyph-palette.vim#usage
 Set `g:fern#renderer` like:
 
 ```vim
-let g:fern#renderer = v:lua.require'fr-web-icons'.palette()
+let g:glyph_palette#palette = v:lua.require'fr-web-icons'.palette()
 ```
 
 Or using lua:
