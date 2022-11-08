@@ -39,7 +39,7 @@ See their [usage section](https://github.com/lambdalisue/glyph-palette.vim#usage
 
 ### How to add individual colors to the icons?
 
-Set `g:fern#renderer` like:
+Set `g:glyph_palette#palette` like:
 
 ```vim
 let g:glyph_palette#palette = v:lua.require'fr-web-icons'.palette()
