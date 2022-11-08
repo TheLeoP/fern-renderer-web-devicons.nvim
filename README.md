@@ -4,7 +4,7 @@
 
 [fern.vim](https://github.com/lambdalisue/fern.vim) plugin which add file type icons through [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons).
 
-## Requreiments
+## Requirements
 
 - [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons)
 - Patched font
@@ -28,4 +28,4 @@ vim.g["fern#renderer"] = "nvim-web-devicons"
 
 ## See also
 
-- [lambdalisue/fern-renderer-nerdfont.vim](https://github.com/lambdalisue/fern-renderer-nerdfont.vim)
+- [lambdalisue/glyph-palette.vim](https://github.com/lambdalisue/glyph-palette.vim) - Apply individual colors on icons
