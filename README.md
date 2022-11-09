@@ -2,7 +2,7 @@
 
 [![fern renderer](https://img.shields.io/badge/🌿%20fern-plugin-yellowgreen)](https://github.com/lambdalisue/fern.vim)
 
-[fern.vim](https://github.com/lambdalisue/fern.vim) plugin which add file type icons through [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons).
+[fern.vim](https://github.com/lambdalisue/fern.vim) plugin to add file type icons through [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons).
 
 ## Requirements
 
