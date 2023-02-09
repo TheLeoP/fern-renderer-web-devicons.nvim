@@ -67,7 +67,7 @@ function! s:get_node_symbol(node) abort
   if a:node.status is# s:STATUS_NONE
     let filename = fnamemodify(a:node.bufname, ':t')
     let extension = fnamemodify(a:node.bufname, ':e')
-    let symbol = luaeval(printf('require"nvim-web-devicons".get_icon("%s", "%s")', filename, extension))
+    let symbol = luaeval(printf('require"nvim-web-devicons".get_icon("%s", "%s", {default = true})', filename, extension))
 
   elseif a:node.status is# s:STATUS_COLLAPSED
     let symbol = ""
