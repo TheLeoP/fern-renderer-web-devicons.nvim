@@ -59,9 +59,13 @@ function! s:render(nodes) abort
       endif
     endfor
   endif
-
+  
+  if &filetype ==# "fern"
+    cal clearmatches()
+  endif
   let Profile = fern#profile#start('fern#renderer#web_devicons#s:render')
-  return s:AsyncLambda.map(copy(a:nodes), { v, -> s:render_node(v, base, options) })
+  return s:AsyncLambda.map(copy(a:nodes), { v, idx -> s:render_node(v, base, options, idx) })
+        \.catch({ e -> execute("echom " . string(e)) })
         \.finally({ -> Profile() })
 endfunction
 
@@ -97,7 +101,7 @@ function! s:highlight() abort
   highlight default link FernIndentMarkers NonText
 endfunction
 
-function! s:render_node(node, base, options) abort
+function! s:render_node(node, base, options, idx) abort
   let level = len(a:node.__key) - a:base
   if level is# 0
     let suffix = a:node.label =~# '/$' ? '' : '/'
@@ -124,23 +128,33 @@ function! s:render_node(node, base, options) abort
     let leading = repeat(a:options.leading, level - 1)
   endif
 
-  let symbol = s:get_node_symbol(a:node)
+  let symbol_hlgroup = s:get_node_symbol(a:node)
+  let symbol = symbol_hlgroup[0]
+  let hlgroup = symbol_hlgroup[1]
+  if hlgroup !=# ""
+    if &filetype ==# "fern"
+      cal matchaddpos(hlgroup, [[a:idx + 1, strlen(a:options.root_leading . leading) + 1]])
+    endif
+  endif
   let suffix = a:node.status ? '/' : ''
   return a:options.root_leading . leading . symbol . a:node.label . suffix . '' . a:node.badge
 endfunction
 
 function! s:get_node_symbol(node) abort
+  let hlgroup = ""
   if a:node.status is# s:STATUS_NONE
     let filename = fnamemodify(a:node.bufname, ':t')
     let extension = fnamemodify(a:node.bufname, ':e')
-    let symbol = luaeval(printf('require"nvim-web-devicons".get_icon("%s", "%s", {default = true})', filename, extension))
+    let symbol_hlgroup = luaeval(printf('{ require"nvim-web-devicons".get_icon("%s", "%s", {default = true}) }', filename, extension))
+    let symbol = symbol_hlgroup[0]
+    let hlgroup  = symbol_hlgroup[1]
 
   elseif a:node.status is# s:STATUS_COLLAPSED
     let symbol = ""
   else
     let symbol = ""
   endif
-  return symbol . ' '
+  return [symbol . ' ', hlgroup]
 endfunction
 
 call s:Config.config(expand('<sfile>:p'), {
