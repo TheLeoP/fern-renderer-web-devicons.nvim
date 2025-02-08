@@ -50,3 +50,13 @@ Or using lua:
 ```lua
 vim.g["glyph_palette#palette"] = require'fr-web-icons'.palette()
 ```
+
+### How to use nvim-web-devicons's color palette?
+
+Set `g:fern#renderer#web_devicons#use_web_devicons_color_palette` like
+
+```vim
+let g:fern#renderer#web_devicons#use_web_devicons_color_palette = v:true
+```
+
+⚠️You have to disable `glyph_palette#apply()` autocmd if you use this feature.

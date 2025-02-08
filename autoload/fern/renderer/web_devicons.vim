@@ -60,12 +60,13 @@ function! s:render(nodes) abort
     endfor
   endif
   
-  if &filetype ==# "fern"
-    cal clearmatches()
+  if get(g:, "fern#renderer#web_devicons#use_web_devicons_color_palette", v:false)
+    if &filetype ==# "fern"
+      cal clearmatches()
+    endif
   endif
   let Profile = fern#profile#start('fern#renderer#web_devicons#s:render')
   return s:AsyncLambda.map(copy(a:nodes), { v, idx -> s:render_node(v, base, options, idx) })
-        \.catch({ e -> execute("echom " . string(e)) })
         \.finally({ -> Profile() })
 endfunction
 
@@ -131,9 +132,17 @@ function! s:render_node(node, base, options, idx) abort
   let symbol_hlgroup = s:get_node_symbol(a:node)
   let symbol = symbol_hlgroup[0]
   let hlgroup = symbol_hlgroup[1]
-  if hlgroup !=# ""
-    if &filetype ==# "fern"
-      cal matchaddpos(hlgroup, [[a:idx + 1, strlen(a:options.root_leading . leading) + 1]])
+  if get(g:, "fern#renderer#web_devicons#use_web_devicons_color_palette", v:false)
+    if hlgroup !=# ""
+      if &filetype ==# "fern"
+        cal matchaddpos(hlgroup, [[a:idx + 1, strlen(a:options.root_leading . leading) + 1]])
+        if !get(b:,'fern_web_devicons_renderer_autocmd_defined', v:false)
+          augroup fern_web_devicons_renderer
+            autocmd BufWinLeave <buffer> cal clearmatches()
+          augroup END
+          let b:fern_web_devicons_renderer_autocmd_defined = v:true
+        endif
+      endif
     endif
   endif
   let suffix = a:node.status ? '/' : ''
